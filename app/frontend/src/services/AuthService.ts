@@ -21,7 +21,7 @@ export const createUser = async ({ username, password }: IPayloadUser) => {
 }
 
 export const validateTokenUser = async (token: string) => {
-  const { data } = await api.get<IUser>('/users', {
+  const { data } = await api.get<IUser>('/users/validate', {
     headers: { Authorization: `Bearer ${token}` },
   })
   setTokenGlobal(token)

@@ -24,6 +24,8 @@ services:
       - db
     depends_on: 
       - db      
+    volumes:
+      - ./backend:/usr/app-backend
     environment:
       - API_PORT=3001
       - DATABASE_URL=postgresql://postgres:postgres@db:5432/ngCash?schema=public
@@ -47,6 +49,8 @@ services:
       - backend
     environment:
       - REACT_APP_URL_API=http://localhost:3001
+    volumes:
+      - ./frontend:/usr/app-frontend
     restart: 'always'
     command: >
       bash -c '
