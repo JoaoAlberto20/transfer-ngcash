@@ -73,7 +73,7 @@ export function FormSignIn() {
             control={control}
             render={({ field: { onChange, value } }) => (
               <Input
-                type="text"
+                type="password"
                 placeholder="Digite sua senha cadastrado"
                 variant="PRIMARY"
                 icon={<LockSimple />}

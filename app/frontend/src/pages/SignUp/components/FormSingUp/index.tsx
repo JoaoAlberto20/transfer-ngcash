@@ -73,7 +73,7 @@ export function FormSingUp() {
             control={control}
             render={({ field: { onChange, value } }) => (
               <Input
-                type="text"
+                type="password"
                 placeholder="Digite sua senha"
                 variant="PRIMARY"
                 icon={<LockSimple />}
@@ -91,7 +91,7 @@ export function FormSingUp() {
             control={control}
             render={({ field: { onChange, value } }) => (
               <Input
-                type="text"
+                type="password"
                 placeholder="Confirme a sua senha"
                 variant="PRIMARY"
                 icon={<LockSimple />}
