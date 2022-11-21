@@ -150,7 +150,6 @@ Nessa requisição POST é necessário informar o seguinte JSON:
 }
 
 ```
-<br />
 
 #### Login de usuário
 
@@ -167,7 +166,6 @@ Nessa requisição POST é necessário informar o seguinte JSON:
 }
 
 ```
-<br />
 
 #### Balanço do usuário
 
@@ -175,7 +173,6 @@ Nessa requisição POST é necessário informar o seguinte JSON:
 |---|---|---|
 | `GET` | Retorna o balanço da conta do usuário | http://localhost:3001/balance |
 
-<br />
 
 #### Transações
 
@@ -203,7 +200,6 @@ e na requisição GET para FILTRAR as transações você deve passar  as seguint
   "date": Data da criação da transação
 }
 ```
-<br />
 
 <div id="license" />
 
