@@ -52,11 +52,13 @@ export function ModalTransactionCreate({
     try {
       await createTransactions(data)
       toast.success('Transação feito com sucesso.')
-      reset()
     } catch (error) {
       if (error instanceof AxiosError) {
         toast.info(error.response?.data.message)
       }
+    } finally {
+      handleCloseModal()
+      reset()
     }
   }
 

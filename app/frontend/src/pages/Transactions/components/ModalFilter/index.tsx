@@ -1,9 +1,10 @@
 import { yupResolver } from '@hookform/resolvers/yup'
+import { Axios } from 'axios'
 import { useContext } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import * as yup from 'yup'
-import { Button } from '../../../../components/Button'
 
+import { Button } from '../../../../components/Button'
 import { Input } from '../../../../components/Input'
 import { Modal } from '../../../../components/Modal'
 import { Select } from '../../../../components/Select'
@@ -32,18 +33,28 @@ export function ModalFilterTransactions({
 }: ModalFilterTransactionsProps) {
   const { searchTransactionByDateType } = useContext(TransactionsContext)
 
-  const { control, handleSubmit } = useForm<TypesSchemaFilterTransactions>({
-    resolver: yupResolver(schemasFilterTransactions),
-    defaultValues: {
-      type: 'all',
-      date: '',
-    },
-  })
+  const { control, handleSubmit, reset } =
+    useForm<TypesSchemaFilterTransactions>({
+      resolver: yupResolver(schemasFilterTransactions),
+      defaultValues: {
+        type: 'all',
+        date: '',
+      },
+    })
 
   const handleSubmitFilterTransactions = async (
     data: TypesSchemaFilterTransactions,
   ) => {
-    await searchTransactionByDateType(data)
+    try {
+      await searchTransactionByDateType(data)
+    } catch (error) {
+      if (error instanceof Axios) {
+        console.log(error)
+      }
+    } finally {
+      handleCloseModal()
+      reset()
+    }
   }
 
   return (
