@@ -10,7 +10,7 @@ const userRoutes = Router();
 
 userRoutes.post('/', userController.createUser);
 userRoutes.get(
-  '/',
+  '/validate',
   ensureAuthenticated, 
   userController.validateUser
 );

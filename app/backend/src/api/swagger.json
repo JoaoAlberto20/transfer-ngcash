@@ -1,35 +1,54 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Venmo API Documentation",
-    "description": "This is an API for a Venmo clone using Node, Express, Prisma and Postgres",
-    "version": "1.0.0"
+    "title": "Transfer NgCah API Documentation",
+    "description": "This is an API for a clone using Node, Express, Prisma and Postgres",
+    "version": "1.0.0",
+    "contact": {
+      "name": "João Alberto",
+      "email": "joaoalbertosv15@gmail.com"
+    }    
   },
   "servers": [
     {
-      "url": "http://localhost:3008/"
+      "url": "http://localhost:3001/"
     }
   ],
   "tags": [
     {
-      "name": "auth",
-      "description": "Authentication endpoints"
+      "name": "Login",
+      "description": "Autenticaticação do usuário"
     },
     {
-      "name": "transactions",
-      "description": "Transactions endpoints"
+      "name": "Users",
+      "description": "Gerenciamento de usuários"
+    },
+    {
+      "name": "Balance",
+      "description": "Balanço do usuário"
+    },
+    {
+      "name": "Transactions",
+      "description": "Operação para transações"
     }
   ],
   "paths": {
-    "/auth/signup": {
+    "/users": {
       "post": {
-        "tags": ["auth"],
-        "summary": "User Signup",
+        "tags": ["Users"],
+        "summary": "Cria um novo usuário",
+        "description": "Campo para criação de um usuário",
         "requestBody": {
+          "description": "Campos obrigatórios para criação de um usuários",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "type": "object",
+                "$ref": "#/components/schemas/LoginCreate",
+                "example": {
+                  "username": "Usersilva",
+                  "password": "User123456"
+                }
               }
             }
           },
@@ -37,27 +56,30 @@
         },
         "responses": {
           "201": {
-            "description": "Sucessful Signup",
+            "description": "Operação realizada com sucesso",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "properties": {
-                    "token": {
-                      "type": "string",
-                      "format": "jwt"
-                    }
-                  }
+                  "$ref": "#/components/schemas/UsersLoginCreate"
                 }
               }
             }
           },
           "400": {
-            "description": "Invalid user",
+            "description": "Username já está sendo utilizado",
             "content": {
               "application/json": {
-                "example": {
-                  "message": "User already exists"
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Username já está sendo utilizado."
+                  }
                 }
               }
             }
@@ -65,96 +87,252 @@
         }
       }
     },
-    "/auth/login": {
+    "/users/validate": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Validando o usuário",
+        "security": [{ "BearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "Operação feita com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Usuário não existe.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Usuário não existe."
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token invalido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Token invalido."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/login": {
       "post": {
-        "tags": ["auth"],
-        "summary": "User Login",
+        "tags": ["Login"],
+        "summary": "Faz o login do usuário",
+        "description": "Campo para autenticação de um usuário",
+        "requestBody": {
+          "description": "Compos obrigatório para autenticação de um usuário",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/LoginCreate",
+                "example": {
+                  "username": "Usersilva",
+                  "password": "User123456"
+                }
+              }
+            }
+          },
+          "required": true 
+        },
+        "responses": {
+          "201": {
+            "description": "Login feito com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/UsersLoginCreate"
+                }
+              }
+            } 
+          },
+          "400": {
+            "description": "Usuário invalido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Email ou password invalido."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/balance": {
+      "get": {
+        "tags": ["Balance"],
+        "summary": "Retorna o balanço da conta do usuário",
+        "security": [{ "BearerAuth": [] }],
+        "responses": {
+          "201": {
+            "description": "Balance feito com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Balance"
+                }
+              }
+            } 
+          },
+          "400": {
+            "description": "Usuário não existe.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Usuário não existe."
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token invalido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Token invalido."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions": {
+      "post": {
+        "tags": ["Transactions"],
+        "summary": "Create Transactions",
+        "security": [{ "BearerAuth": [] }],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "number"
+                  }
+                }
               }
             }
           },
           "required": true
         },
         "responses": {
-          "200": {
-            "description": "Sucessful Login",
+          "201": {
+            "description": "Operação feita com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Transaction"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Usuário não existe.",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "token": {
+                    "message": {
                       "type": "string"
                     }
+                  },
+                  "example": {
+                    "message": "Usuário não existe."
                   }
                 }
               }
             }
           },
           "401": {
-            "description": "Invalid user",
-            "content": {
-              "application/json": {
-                "example": {
-                  "message": "Invalid user or password"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid user schema",
-            "content": {
-              "application/json": {
-                "example": {
-                  "message": "Invalid user schema"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/auth/me": {
-      "get": {
-        "tags": ["auth"],
-        "summary": "Get User",
-        "security": [{ "BearerAuth": [] }],
-        "responses": {
-          "200": {
-            "description": "Sucessful operation",
+            "description": "Token invalido.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserData"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Invalid token",
-            "content": {
-              "application/json": {
-                "example": {
-                  "message": "Invalid token"
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Token invalido."
+                  }
                 }
               }
             }
           }
         }
-      }
-    },
-    "/transaction": {
+      },
       "get": {
-        "tags": ["transactions"],
-        "summary": "Get Transactions",
+        "tags": ["Transactions"],
+        "summary": "Retornando transactions",
         "security": [{ "BearerAuth": [] }],
         "responses": {
-          "200": {
-            "description": "Sucessful Operation",
+          "201": {
+            "description": "Operação feita com sucesso.",
             "content": {
               "application/json": {
                 "schema": {
@@ -166,77 +344,38 @@
               }
             }
           },
-          "401": {
-            "description": "Invalid token",
+          "400": {
+            "description": "Usuário não existe.",
             "content": {
               "application/json": {
-                "example": {
-                  "message": "Invalid token"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": ["transactions"],
-        "summary": "Create Transactions",
-        "security": [{ "BearerAuth": [] }],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "creditUsername": {
-                    "type": "string"
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
                   },
-                  "transactionValue": {
-                    "type": "number"
+                  "example": {
+                    "message": "Usuário não existe."
                   }
                 }
               }
             }
           },
-          "required": true
-        },
-        "responses": {
-          "201": {
-            "description": "Sucessful Operation",
-            "content": {
-              "application/json": {
-                "example": {
-                  "message": "Transaction was sucessfully created"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request body",
-            "content": {
-              "application/json": {
-                "example": {
-                  "message": "Invalid transaction schema"
-                }
-              }
-            }
-          },
           "401": {
-            "description": "Invalid token",
+            "description": "Token invalido.",
             "content": {
               "application/json": {
-                "example": {
-                  "message": "Invalid token"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Account not found",
-            "content": {
-              "application/json": {
-                "example": {
-                  "message": "Debit account not found"
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Token invalido."
+                  }
                 }
               }
             }
@@ -245,10 +384,25 @@
       }
     }
   },
-
   "components": {
     "schemas": {
       "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "username": {
+            "type": "string"
+          },
+          "accountId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "LoginCreate": {
         "type": "object",
         "properties": {
           "username": {
@@ -259,27 +413,27 @@
           }
         }
       },
-      "UserData": {
+      "UsersLoginCreate": {
         "type": "object",
         "properties": {
-          "username": {
+          "token": {
             "type": "string"
           },
+          "user": {
+            "type": "object",
+            "$ref": "#/components/schemas/User"
+          }
+        }
+      },
+      "Balance": {
+        "type": "object",
+        "properties": {
           "id": {
             "type": "string",
             "format": "uuid"
           },
-          "accountId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "account": {
-            "type": "object",
-            "properties": {
-              "balance": {
-                "type": "number"
-              }
-            }
+          "balance": {
+            "type": "number"
           }
         }
       },
@@ -292,7 +446,7 @@
           },
           "type": {
             "type": "string",
-            "enum": ["credit", "debit"]
+            "enum": ["cash-in", "cash-out"]
           },
           "value": {
             "type": "number"
@@ -309,6 +463,7 @@
     },
     "securitySchemes": {
       "BearerAuth": {
+        "description": "Autenticação utilIzando JWT",
         "type": "http",
         "scheme": "bearer",
         "bearerFormat": "JWT"

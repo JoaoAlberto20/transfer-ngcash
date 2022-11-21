@@ -15,7 +15,7 @@ export async function ensureAuthenticated(
 ) {
   const authHeader = request.headers.authorization;
 
-  if (!authHeader) throw new AppError('Token missing', 401);
+  if (!authHeader) throw new AppError('Token invalido', 401);
 
   const [, token] = authHeader.split(' ');
 
@@ -27,7 +27,7 @@ export async function ensureAuthenticated(
 
     const user = await usersRepository.findOne(username);
 
-    if (!user) throw new AppError('User does not exist!', 401);
+    if (!user) throw new AppError('User does not exist!', 400);
 
     request.user = {
       id: user.id,
@@ -37,6 +37,6 @@ export async function ensureAuthenticated(
 
     next();
   } catch (err) {
-    throw new AppError('Invalid token', 401);
+    throw new AppError('Token invalido', 401);
   }
 }

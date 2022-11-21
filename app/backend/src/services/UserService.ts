@@ -26,7 +26,7 @@ export class UserService {
     const schemasValid = await UserService.zodValidation(request);
 
     const userAlreadyExist = await this.userModel.findOne(schemasValid.username);
-    if(userAlreadyExist) throw new AppError('User already exists');
+    if(userAlreadyExist) throw new AppError('Username já está sendo utilizado.');
 
     const passwordHash =  await hash(schemasValid.password as string, 8);
 
