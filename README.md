@@ -9,7 +9,7 @@
 <p align="center">
  <a href="#about">Sobre</a> •
  <a href="#components">Diferencial</a> •
- <a href="#instruções">Instruções</a> •
+ <a href="#instruções">Instruções para rodar a aplicação</a> •
  <a href="#endPoints">End Points</a> •
  <a href="#license">License</a>
 </p>
@@ -40,7 +40,7 @@ Estruturar uma aplicação web Fullstack, Dockerizada, cujo objetivo seja possib
    - ESLint
 
 </details>
-
+<br />
 <details>
   <summary> 🖥️ Tecnologias Utilizadas no FrontEnd</summary>
    <br />
@@ -109,27 +109,28 @@ $ cd transfer-ngcash
 # Este comando vai inicializar o docker e vai gerar um pasta node_modules no front e backend, 
 # recomendo utilizar esse comando para poder retirar os erros de eslint por falta de instalar as dependências
 $ npm run compose:up:dev 
-
 # rode esse comando para ver logs da aplicação
 $ npm run logs
+
 
 # para parar completamente a aplicação
 $ npm run compose:down:dev 
 
+
 # Ronde a aplicação com DOCKER em Produção:
 # Este comando vai inicializar o docker não vai gerar uma pasta node_modules na frontend e backend
 $ npm run compose:up
-
-# rode esse comando para vero logs da aplicação
+# rode esse comando para ver logs da aplicação
 $ npm run logs
+
 
 # para parar completamente a aplicação
 $ npm run compose:down  
 
-
-# O Backend inciará na porta:3001 - acesse <  http://localhost:3001 >
-# O Frontend inciará na porta:3000 - acesse <  http://http://localhost:3001/api-docs >
-# O Frontend inciará na porta:3000 - acesse <  http://localhost:3000 >
+# Você pode abrir o aplicativo e os documentos da API nestes URLs:
+$ O Backend inciará na porta:3001 - acesse <  http://localhost:3001 >
+$ A documentação estará disponível em -  acesse <  http://localhost:3001/api-docs >
+$ O Frontend inciará na porta:3000 - acesse <  http://localhost:3000 >
 
 ```
 ---
