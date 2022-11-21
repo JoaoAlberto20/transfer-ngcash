@@ -1,0 +1,66 @@
+version: '3.9'
+
+services:
+  db:
+    image: 'postgres'
+    container_name: postgres
+    ports:
+      - '5432:5432'
+    restart: "always"
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'postgres'
+      POSTGRES_DB: 'ngCash'
+    volumes:
+      - pg-data:/data/postgres
+  backend:
+    build: ./backend
+    container_name: backend
+    tty: true
+    stdin_open: true
+    ports:
+      - '3001:3001'
+    links: 
+      - db
+    depends_on: 
+      - db      
+    environment:
+      - API_PORT=3001
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/ngCash?schema=public
+      - JWT_SECRET=secreteKey
+    restart: 'always'
+    command: >
+      bash -c '
+        npm install
+        npx prisma generate
+        npx prisma migrate dev
+        npm run dev
+      '
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    ports:
+      - '3000:3000'
+    links:
+      - backend
+    depends_on:
+      - backend
+    environment:
+      - REACT_APP_URL_API=http://localhost:3001
+    restart: 'always'
+    command: >
+      bash -c '
+        npm install
+        npm start
+      '
+
+volumes:
+  pg-data:
+    driver: local
+
+# As chaves `tty`, `stdin_open` e `command` fazem com que o container fique
+# rodando em segundo plano, bem como tornam possível o uso do comando
+# `docker attach`, já deixando o terminal atual acoplado ao container, direto
+# no bash. Apesar disso, utilizar o attach mais de uma vez irá replicar o
+# terminal, portanto é melhor utilizar o comando `docker exec`.
+

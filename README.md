@@ -108,7 +108,8 @@ $ cd transfer-ngcash
 
 # Rodando a aplicação com DOCKER em modo de Desenvolvimento:
 
-# Este comando vai inicializar o docker e vai gerar um pasta node_modules no front e backend, recomendo utilizar esse comando para poder retirar os erros de eslint por falta de instalar as dependências
+# Este comando vai inicializar o docker e vai gerar um pasta node_modules no front e backend, 
+# recomendo utilizar esse comando para poder retirar os erros de eslint por falta de instalar as dependências
 $ npm run compose:up:dev 
 # para parar completamente a aplicação
 $ npm run compose:down:dev 
