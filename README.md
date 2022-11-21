@@ -112,6 +112,9 @@ $ npm run compose:up:dev
 # para parar completamente a aplicação
 $ npm run compose:down:dev 
 
+# rode esse comando para vero logs da aplicação
+$ npm run logs
+
 # Ronde a aplicação com DOCKER em Produção:
 
 # Este comando vai inicializar o docker não vai gerar uma pasta node_modules na frontend e backend
