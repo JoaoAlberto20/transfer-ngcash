@@ -101,11 +101,10 @@ Além disto é bom ter um editor para trabalhar com o código como [VSCode](http
 
 # Acesse o terminal do seu sistema operacional e escolha uma pasta de sua preferencia
 # cole o comando abaixo no terminal
-$ git clone git@github.com:JoaoAlberto20/ngCash.git
-
+$ git clone git@github.com:JoaoAlberto20/transfer-ngcash.git
 
 # Entre na pasta clonada com seguinte comando
-$ cd Transfer NgCash
+$ cd transfer-ngcash
 
 # Rodando a aplicação com DOCKER em modo de Desenvolvimento:
 
