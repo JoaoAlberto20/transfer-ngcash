@@ -110,21 +110,22 @@ $ cd transfer-ngcash
 # recomendo utilizar esse comando para poder retirar os erros de eslint por falta de instalar as dependências
 $ npm run compose:up:dev 
 
+# rode esse comando para ver logs da aplicação
+$ npm run logs
+
 # para parar completamente a aplicação
 $ npm run compose:down:dev 
-
-# rode esse comando para vero logs da aplicação
-$ npm run logs
 
 # Ronde a aplicação com DOCKER em Produção:
 # Este comando vai inicializar o docker não vai gerar uma pasta node_modules na frontend e backend
 $ npm run compose:up
 
+# rode esse comando para vero logs da aplicação
+$ npm run logs
+
 # para parar completamente a aplicação
 $ npm run compose:down  
 
-# rode esse comando para vero logs da aplicação
-$ npm run logs
 
 # O Backend inciará na porta:3001 - acesse <  http://localhost:3001 >
 # O Frontend inciará na porta:3000 - acesse <  http://http://localhost:3001/api-docs >
