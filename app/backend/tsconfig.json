@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "commonjs",
+    "rootDir": "./",
+    "outDir": "./dist",
+    "baseUrl": "./src",
+    "paths": {
+      "@controller/*": [
+        "controller/*"
+      ],
+      "@services/*": [
+        "services/*"
+      ],
+      "@database/*": [
+        "database/*"
+      ],
+      "@routes/*": [
+        "routes/*"
+      ],
+      "@models/*": [
+        "models/*"
+      ],
+      "@shared/*": [
+        "shared/*"
+      ]
+    },
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "strict": true,
+    "lib": [
+      "esnext"
+    ],
+  }
+}
