@@ -64,7 +64,7 @@ Estruturar uma aplicação web Fullstack, Dockerizada, cujo objetivo seja possib
 
 ## Qual é o diferencial deste código Diferencial
 
-Essa é a minha **Obra Prima**, me dediquei muito a construir o backend e front-end, e ele foi feito com perfeição, usando um único handler de erro capaz de administrar erros de vários tipos, foi feito completamente em Typescript pensando em escalabilidade, todo código é extremamente legível e resumido, todas as funções são bem framentadas por necessidade, toda estrutura do Back-end feita em MSC é pensada para o código principal só rodar depois de todas as validações passarem, de fato, uma obra de arte.
+Essa é a minha **Obra Prima**, me dediquei muito a construir o backend e front-end, e ele foi feito com perfeição, usando um único handler de erro capaz de administrar erros de vários tipos, foi feito completamente em Typescript pensando em escalabilidade, todo código é extremamente legível e resumido, todas as funções são bem ferramentadas por necessidade, toda estrutura do Back-end feita em MSC é pensada para o código principal só rodar depois de todas as validações passarem, de fato, uma obra de arte.
 
 ---
 
@@ -81,11 +81,10 @@ Este projeto é divido em duas partes:
 
 💡O Backend deve estar rodando em sua máquina para que o frontend seja renderizado
 
-<br />
-
 ### Pré-requisitos
 
 <br />
+
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
 [Git](https://git-scm.com), [Node.js](https://nodejs.org/en/).
 Além disto é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/)
@@ -93,7 +92,6 @@ Além disto é bom ter um editor para trabalhar com o código como [VSCode](http
 <br />
 
 ### 🎲 Rodando a aplicação por completo (Backend, Frontend)
-<br />
 
 ```bash
 
