@@ -23,8 +23,6 @@ export function Transactions() {
   const [isModalCreateVisible, setIsModalCreateVisible] = useState(false)
   const [isModalFilterVisible, setIsModalFilterVisible] = useState(false)
 
-  console.log(isModalFilterVisible)
-
   useEffect(() => {
     const getTransactionsBalance = async () => {
       await getAllTransactionsBalance()
@@ -41,8 +39,6 @@ export function Transactions() {
     setIsModalCreateVisible(false)
     setIsModalFilterVisible(false)
   }
-
-  console.log(new Date(''))
 
   return (
     <div>

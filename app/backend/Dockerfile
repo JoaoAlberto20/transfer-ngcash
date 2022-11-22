@@ -4,6 +4,10 @@ WORKDIR /usr/app-backend
 
 COPY package* ./
 
+RUN npm install
+
 COPY . .
 
+RUN npx prisma generate
 
+CMD [ "npm", "run", "dev" ]

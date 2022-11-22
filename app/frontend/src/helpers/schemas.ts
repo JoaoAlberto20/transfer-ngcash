@@ -13,7 +13,6 @@ const schemas = {
       /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$/,
       'A senha deve conter pelo menos uma letra maiúscula e uma minúscula, e um número',
     )
-    .trim()
     .required('Informe o password'),
 }
 

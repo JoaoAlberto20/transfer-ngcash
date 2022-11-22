@@ -93,45 +93,38 @@ Além disto é bom ter um editor para trabalhar com o código como [VSCode](http
 
 ### 🎲 Rodando a aplicação por completo (Backend, Frontend)
 
-```bash
+Será necessário que a porta 3000 e 3001 estejam disponíveis para a aplicação, Postgresql usará a porta 5432 
 
-# Clone este repositório
+1 - Clone o repositório em uma pasta de sua preferencia 
+```
+  $ git clone git@github.com:JoaoAlberto20/transfer-ngcash.git
+  $ cd transfer-ngcash
+```
+2 - E suba o dockercompose, todas as depêndencias serão automaticamente instaladas
+```
+  $ npm run compose:up:dev   // para subir a aplicação
+```
+3 - E entra na terminal do backend e rode o seguinte comando para subir as migrations
+```
+  $ docker exec -it backend bash
+  $ npx prisma migrate dev
+  $ exit ## este comando  e pra sair do terminal do docker
+```
 
-# Acesse o terminal do seu sistema operacional e escolha uma pasta de sua preferencia
-# cole o comando abaixo no terminal
-$ git clone git@github.com:JoaoAlberto20/transfer-ngcash.git
+4 - Após rodar os comando, aguarde um pouco que a aplicação irá ficar disponivel nas seguintes rotas:
 
-# Entre na pasta clonada com seguinte comando
-$ cd transfer-ngcash
+```
+  - Front End: http://localhost:3000
 
-# Rodando a aplicação com DOCKER em modo de Desenvolvimento:
+  - Back End: http://localhost:3001
 
-# Este comando vai inicializar o docker e vai gerar um pasta node_modules no front e backend, 
-# recomendo utilizar esse comando para poder retirar os erros de eslint por falta de instalar as dependências
-$ npm run compose:up:dev 
-# rode esse comando para ver logs da aplicação
-$ npm run logs
+  - Back End documentação : http://localhost:3001/api-docs
+```
 
+5 - E para parar a aplicação por completo  rode o seguinte comando 
 
-# para parar completamente a aplicação
-$ npm run compose:down:dev 
-
-
-# Ronde a aplicação com DOCKER em Produção:
-# Este comando vai inicializar o docker não vai gerar uma pasta node_modules na frontend e backend
-$ npm run compose:up
-# rode esse comando para ver logs da aplicação
-$ npm run logs
-
-
-# para parar completamente a aplicação
-$ npm run compose:down  
-
-# Você pode abrir o aplicativo e os documentos da API nestes URLs:
-$ O Backend inciará na porta:3001 - acesse <  http://localhost:3001 >
-$ A documentação estará disponível em -  acesse <  http://localhost:3001/api-docs >
-$ O Frontend inciará na porta:3000 - acesse <  http://localhost:3000 >
-
+```
+  $ npm run compose:down:dev
 ```
 ---
 
