@@ -102,13 +102,16 @@ Será necessário que a porta 3000 e 3001 estejam disponíveis para a aplicaçã
 ```
 2 - E suba o dockercompose, todas as depêndencias serão automaticamente instaladas
 ```
+  ## este comando ira derrubar todas aplicações node no seu dispositivo recomendo rodar ele para continuar o processo
+  $ killall node
+  
   $ npm run compose:up:dev   // para subir a aplicação
 ```
 3 - E entra na terminal do backend e rode o seguinte comando para subir as migrations
 ```
   $ docker exec -it backend bash
   $ npx prisma migrate dev
-  $ exit ## este comando  e pra sair do terminal do docker
+  $ exit // este comando  é pra sair do terminal do docker
 ```
 
 4 - Após rodar os comando, aguarde um pouco que a aplicação irá ficar disponivel nas seguintes rotas:
