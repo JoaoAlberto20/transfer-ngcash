@@ -30,11 +30,6 @@
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "sourceMap": true,
-    "strict": true,
-    "lib": [
-      "esnext"
-    ],
+    "resolveJsonModule": true
   }
 }
